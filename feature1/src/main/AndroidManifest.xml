@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="me.vavra.multimoduleactivitynavigationsample.feature1">
+
+    <application>
+        <activity
+            android:name=".Feature1Activity"
+            android:exported="true"
+            android:label="@string/title_activity_feature1"
+            android:theme="@style/Theme.MultimoduleActivityNavigationSample.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

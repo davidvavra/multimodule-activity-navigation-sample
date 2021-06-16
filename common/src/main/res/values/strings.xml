@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Multimodule Activity Navigation Sample</string>
+    <string name="title_activity_feature1">Feature 1</string>
+</resources>
