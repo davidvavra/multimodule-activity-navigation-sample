@@ -1,7 +1,6 @@
 package me.vavra.multimoduleactivitynavigationsample.feature2
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -10,10 +9,18 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dagger.hilt.android.AndroidEntryPoint
+import me.vavra.multimoduleactivitynavigationsample.common.BaseActivity
+import me.vavra.multimoduleactivitynavigationsample.common.contractArgs
 import me.vavra.multimoduleactivitynavigationsample.common.ui.theme.MultimoduleActivityNavigationSampleTheme
 import me.vavra.multimoduleactivitynavigationsample.common.ui.theme.Typography
+import me.vavra.multimoduleactivitynavigationsample.navigation.contracts.Feature2Contract
 
-class Feature2Activity : ComponentActivity() {
+@AndroidEntryPoint
+class Feature2Activity : BaseActivity() {
+
+    private val args by contractArgs { contracts.feature2Contract }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -21,7 +28,7 @@ class Feature2Activity : ComponentActivity() {
                 Scaffold(
                     topBar = { TopAppBar(title = { Text("Feature 2") }) },
                     content = {
-                        Content("")
+                        Content(args.argument1)
                     }
                 )
             }
@@ -29,7 +36,7 @@ class Feature2Activity : ComponentActivity() {
     }
 
     @Composable
-    fun Content(argument: String) {
+    fun Content(argument1: String) {
         var result by remember { mutableStateOf("") }
         Column {
             Text(
@@ -37,7 +44,7 @@ class Feature2Activity : ComponentActivity() {
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
             Text(
-                argument,
+                argument1,
                 style = Typography.body2,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp)
             )
@@ -49,7 +56,10 @@ class Feature2Activity : ComponentActivity() {
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
             Button(
-                onClick = {},
+                onClick = {
+                    setContractResult(contracts.feature2Contract, Feature2Contract.Result(result))
+                    finish()
+                },
                 content = { Text("Return result to Feature 1") },
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
