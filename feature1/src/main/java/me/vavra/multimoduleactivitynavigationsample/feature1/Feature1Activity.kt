@@ -36,7 +36,9 @@ class Feature1Activity : BaseActivity() {
             }
         }
         feature2ContractLauncher = registerForActivityResult(contracts.feature2Contract) {
-            uiState.value = it.result1
+            if (it != null) {
+                uiState.value = it.result1
+            }
         }
     }
 
@@ -69,6 +71,14 @@ class Feature1Activity : BaseActivity() {
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp)
                 )
             }
+            Divider(modifier = Modifier.padding(top = 16.dp))
+            Button(
+                onClick = {
+                    contracts.feature3Contract.launch()
+                },
+                content = { Text("Navigate to Feature 3") },
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
+            )
         }
     }
 

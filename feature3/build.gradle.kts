@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("kotlin-android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
@@ -9,22 +9,20 @@ android {
     compileSdk = 30
 
     defaultConfig {
-        applicationId = "me.vavra.multimoduleactivitynavigationsample"
         minSdk = 26
         targetSdk = 30
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -34,19 +32,19 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = rootProject.extra["compose_version"] as String
-        kotlinCompilerVersion = "1.5.10"
+        kotlinCompilerVersion = "1.4.32"
     }
 }
 
 dependencies {
-    implementation(project(":feature1"))
-    implementation(project(":feature2"))
-    implementation(project(":feature3"))
     implementation(project(":common"))
     implementation(project(":navigation"))
     implementation("androidx.core:core-ktx:1.5.0")
@@ -62,5 +60,4 @@ dependencies {
     testImplementation("junit:junit:4.+")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${rootProject.extra["compose_version"]}")
 }
