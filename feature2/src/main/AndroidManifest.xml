@@ -2,4 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.vavra.multimoduleactivitynavigationsample.feature2">
 
+    <application>
+        <activity
+            android:name=".Feature2Activity"
+            android:theme="@style/Theme.MultimoduleActivityNavigationSample.NoActionBar" />
+    </application>
 </manifest>

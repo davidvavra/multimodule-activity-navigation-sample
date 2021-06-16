@@ -6,7 +6,6 @@
         <activity
             android:name=".Feature1Activity"
             android:exported="true"
-            android:label="@string/title_activity_feature1"
             android:theme="@style/Theme.MultimoduleActivityNavigationSample.NoActionBar">
 
             <intent-filter>

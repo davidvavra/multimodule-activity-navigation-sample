@@ -1,4 +1,4 @@
-package me.vavra.multimoduleactivitynavigationsample.feature1
+package me.vavra.multimoduleactivitynavigationsample.feature2
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,15 +13,15 @@ import androidx.compose.ui.unit.dp
 import me.vavra.multimoduleactivitynavigationsample.common.ui.theme.MultimoduleActivityNavigationSampleTheme
 import me.vavra.multimoduleactivitynavigationsample.common.ui.theme.Typography
 
-class Feature1Activity : ComponentActivity() {
+class Feature2Activity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MultimoduleActivityNavigationSampleTheme {
                 Scaffold(
-                    topBar = { TopAppBar(title = { Text("Feature 1") }) },
+                    topBar = { TopAppBar(title = { Text("Feature 2") }) },
                     content = {
-                        Content(null)
+                        Content("")
                     }
                 )
             }
@@ -29,44 +29,36 @@ class Feature1Activity : ComponentActivity() {
     }
 
     @Composable
-    fun Content(result: String?) {
-        var argument by remember { mutableStateOf("") }
+    fun Content(argument: String) {
+        var result by remember { mutableStateOf("") }
         Column {
+            Text(
+                "Argument from Feature 1:",
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
+            )
+            Text(
+                argument,
+                style = Typography.body2,
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+            )
+            Divider(modifier = Modifier.padding(top = 16.dp))
             TextField(
-                value = argument,
-                onValueChange = { argument = it },
-                label = { Text("Argument") },
+                value = result,
+                onValueChange = { result = it },
+                label = { Text("Result") },
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
             Button(
                 onClick = {},
-                content = { Text("Navigate to Feature 2") },
+                content = { Text("Return result to Feature 1") },
                 modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
             )
-            if (result != null) {
-                Divider(modifier = Modifier.padding(top = 16.dp))
-                Text(
-                    "Result from Feature 2:",
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                )
-                Text(
-                    result,
-                    style = Typography.body2,
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp)
-                )
-            }
         }
     }
 
     @Preview(showBackground = true)
     @Composable
-    fun ContentNoResult() {
-        Content(null)
-    }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun ContentWithResult() {
+    fun ContentWithArgument() {
         Content("Value")
     }
 }
